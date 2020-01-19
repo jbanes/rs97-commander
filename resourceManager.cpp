@@ -23,7 +23,7 @@ CResourceManager::CResourceManager(void) :
     m_surfaces[T_SURFACE_CURSOR1] = SDL_utils::createImage(159, LINE_HEIGHT * PPU_Y, SDL_MapRGB(Globals::g_screen->format, COLOR_CURSOR_1));
     m_surfaces[T_SURFACE_CURSOR2] = SDL_utils::createImage(159, LINE_HEIGHT * PPU_Y, SDL_MapRGB(Globals::g_screen->format, COLOR_CURSOR_2));
     // Load font
-    m_font = SDL_utils::loadFont(RES_DIR "NotoSansCJK-Regular.ttc", 8);
+    m_font = SDL_utils::loadFont(RES_DIR "NotoSansCJK-Regular.ttc", 10);
 }
 
 void CResourceManager::sdlCleanup(void)

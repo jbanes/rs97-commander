@@ -89,6 +89,8 @@ class CPanel
     // Selection list
     std::set<unsigned int> m_selectList;
 
+    SDL_Surface *m_footer;
+
     // Pointers to resources
     SDL_Surface *m_iconDir;
     SDL_Surface *m_iconFile;

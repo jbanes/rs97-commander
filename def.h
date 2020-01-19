@@ -21,8 +21,8 @@
 #define LINE_HEIGHT           15
 #define NB_VISIBLE_LINES      14
 #define Y_LIST                17
-#define Y_HEADER              3
-#define Y_FOOTER              228
+#define Y_HEADER              1
+#define Y_FOOTER              227
 #define H_FOOTER              13
 // Dialogs
 #define DIALOG_BORDER         2

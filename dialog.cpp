@@ -151,7 +151,7 @@ void CDialog::render(const bool p_focus) const
     // Draw cursor
     SDL_utils::applySurface(m_cursorX, m_cursorY + m_highlightedLine * LINE_HEIGHT, p_focus ? m_cursor1 : m_cursor2, Globals::g_screen);
     // Draw lines text
-    Sint16 l_y = m_y + 4;
+    Sint16 l_y = m_y + 2;
     if (m_nbTitle) {
         SDL_utils::applySurface(m_cursorX + DIALOG_MARGIN, l_y - 1, m_titleImg, Globals::g_screen, &m_clip);
         l_y += LINE_HEIGHT;

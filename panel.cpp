@@ -32,10 +32,12 @@ CPanel::CPanel(const std::string &p_path, const Sint16 p_x):
         m_fileLister.list(PATH_DEFAULT);
         m_currentPath = PATH_DEFAULT;
     }
+    m_footer = SDL_utils::createImage(PANEL_SIZE, H_FOOTER * PPU_Y, SDL_MapRGB(Globals::g_screen->format, COLOR_BORDER));
 }
 
 CPanel::~CPanel(void)
 {
+  SDL_FreeSurface(m_footer);
 }
 
 void CPanel::render(const bool p_active) const
@@ -110,11 +112,11 @@ void CPanel::render(const bool p_active) const
             l_rect.y = 0;
             l_rect.w = NAME_SIZE;
             l_rect.h = l_surfaceTmp->h;
-            SDL_utils::applySurface(l_x, l_y + 2, l_surfaceTmp, Globals::g_screen, &l_rect);
+            SDL_utils::applySurface(l_x, l_y, l_surfaceTmp, Globals::g_screen, &l_rect);
         }
         else
         {
-            SDL_utils::applySurface(l_x, l_y + 2, l_surfaceTmp, Globals::g_screen);
+            SDL_utils::applySurface(l_x, l_y, l_surfaceTmp, Globals::g_screen);
         }
         SDL_FreeSurface(l_surfaceTmp);
         // Next line
@@ -129,8 +131,11 @@ void CPanel::render(const bool p_active) const
         l_footer = l_s.str();
         File_utils::formatSize(l_footer);
     }
-    SDL_utils::applyText(m_x + 2, Y_FOOTER, Globals::g_screen, m_font, "Size:", Globals::g_colorTextTitle, {COLOR_TITLE_BG});
-    SDL_utils::applyText(m_x + PANEL_SIZE - 2, Y_FOOTER, Globals::g_screen, m_font, l_footer, Globals::g_colorTextTitle, {COLOR_TITLE_BG}, SDL_utils::T_TEXT_ALIGN_RIGHT);
+    
+    SDL_FillRect(m_footer, nullptr, SDL_MapRGB(m_footer->format, COLOR_TITLE_BG));
+    SDL_utils::applyText(2, -2, m_footer, m_font, "Size:", Globals::g_colorTextTitle, {COLOR_TITLE_BG});
+    SDL_utils::applyText(PANEL_SIZE - 2, -2, m_footer, m_font, l_footer, Globals::g_colorTextTitle, {COLOR_TITLE_BG}, SDL_utils::T_TEXT_ALIGN_RIGHT);
+    SDL_utils::applySurface(m_x, Y_FOOTER, m_footer, Globals::g_screen);
 }
 
 const bool CPanel::moveCursorUp(unsigned char p_step)
